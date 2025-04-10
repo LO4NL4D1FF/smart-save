@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { Eye, EyeOff, X } from 'lucide-react';
+import { Eye, EyeOff, X, Upload } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Signup = () => {
   const [firstName, setFirstName] = useState('');
@@ -16,8 +17,9 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [avatar, setAvatar] = useState<string | null>(null);
   
-  const { signup } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,13 +38,36 @@ const Signup = () => {
     setIsLoading(true);
     
     try {
-      await signup(firstName, lastName, username, password);
+      await signup(firstName, lastName, username, password, avatar);
       toast.success('Account created successfully!');
       navigate('/');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to create account');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    try {
+      await loginWithGoogle();
+      toast.success('Signed up with Google successfully!');
+      navigate('/');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to sign up with Google');
+    }
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setAvatar(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -56,12 +81,39 @@ const Signup = () => {
         <div className="flex justify-center mb-6">
           <div className="relative">
             <div className="w-20 h-20 rounded-full border-2 border-smart-black flex items-center justify-center">
-              <span className="text-smart-green text-4xl font-bold">$</span>
+              <span className="text-olive-green text-4xl font-bold">$</span>
             </div>
           </div>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex justify-center mb-4">
+            <div className="relative">
+              <Avatar className="w-24 h-24 cursor-pointer border-2 border-olive-green">
+                {avatar ? (
+                  <AvatarImage src={avatar} alt="User avatar" />
+                ) : (
+                  <AvatarFallback className="bg-gray-200 text-olive-green">
+                    <Upload size={32} />
+                  </AvatarFallback>
+                )}
+              </Avatar>
+              <input
+                type="file"
+                id="avatar"
+                className="hidden"
+                accept="image/*"
+                onChange={handleAvatarChange}
+              />
+              <label
+                htmlFor="avatar"
+                className="absolute bottom-0 right-0 bg-olive-green rounded-full p-1 text-white cursor-pointer"
+              >
+                <Upload size={16} />
+              </label>
+            </div>
+          </div>
+          
           <div className="space-y-2">
             <label htmlFor="firstName" className="block text-smart-black font-medium">
               First Name:
@@ -72,7 +124,7 @@ const Signup = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="John"
-              className="border-smart-green"
+              className="border-olive-green"
             />
           </div>
           
@@ -86,7 +138,7 @@ const Signup = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Doe"
-              className="border-smart-green"
+              className="border-olive-green"
             />
           </div>
           
@@ -100,7 +152,7 @@ const Signup = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Link28"
-              className="border-smart-green"
+              className="border-olive-green"
             />
           </div>
           
@@ -115,7 +167,7 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="border-smart-green pr-10"
+                className="border-olive-green pr-10"
               />
               <button 
                 type="button"
@@ -138,7 +190,7 @@ const Signup = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="border-smart-green pr-10"
+                className="border-olive-green pr-10"
               />
               <button 
                 type="button"
@@ -150,23 +202,38 @@ const Signup = () => {
             </div>
           </div>
           
-          <div className="flex gap-4">
-            <Button 
-              type="submit" 
-              className="flex-1 bg-olive-green hover:bg-olive-green/90 text-white font-semibold"
-              disabled={isLoading}
-            >
-              {isLoading ? "Creating..." : "SIGN UP"}
-            </Button>
-            
-            <Link to="/login" className="flex-1">
-              <Button 
-                type="button" 
-                variant="outline"
-                className="w-full border-olive-green text-olive-green hover:bg-olive-green/10"
-              >
-                Log In
-              </Button>
+          <Button 
+            type="submit" 
+            className="w-full bg-olive-green hover:bg-olive-green/90 text-white font-semibold"
+            disabled={isLoading}
+          >
+            {isLoading ? "Creating..." : "SIGN UP"}
+          </Button>
+
+          <div className="relative flex items-center py-2">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="flex-shrink mx-4 text-gray-400">or</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div>
+          
+          <Button 
+            type="button"
+            className="w-full border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 font-semibold flex items-center justify-center gap-2"
+            onClick={handleGoogleSignup}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20">
+              <path d="M19.8 10.2a11.47 11.47 0 0 0-.17-2H10v3.8h5.5a4.77 4.77 0 0 1-2.04 3.1v2.58h3.3c1.93-1.77 3.04-4.4 3.04-7.48z" fill="#4285F4" />
+              <path d="M10 20c2.75 0 5.07-.91 6.76-2.45l-3.3-2.56a5.99 5.99 0 0 1-8.92-3.15H1.14v2.64A10 10 0 0 0 10 20z" fill="#34A853" />
+              <path d="M4.54 11.84a6.1 6.1 0 0 1 0-3.89V5.31H1.14a10.01 10.01 0 0 0 0 9.38l3.4-2.85z" fill="#FBBC05" />
+              <path d="M10 3.96c1.5 0 2.85.51 3.92 1.52l2.92-2.9A10 10 0 0 0 10 0a10 10 0 0 0-8.86 5.31l3.4 2.64A5.99 5.99 0 0 1 10 3.96z" fill="#EA4335" />
+            </svg>
+            Continue with Google
+          </Button>
+          
+          <div className="mt-2 text-center">
+            <span className="text-smart-black">Already have an account? </span>
+            <Link to="/login" className="text-olive-green hover:underline font-medium">
+              Log In
             </Link>
           </div>
         </form>
