@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -97,5 +91,27 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .dashboard-card {
+    @apply bg-smart-gray transition-all duration-200 ease-in-out hover:bg-smart-black rounded-2xl p-6 relative overflow-hidden;
+  }
+  
+  .dashboard-card:hover .card-title {
+    @apply text-smart-white;
+  }
+  
+  .dashboard-card:hover .card-subtitle {
+    @apply text-gray-300;
+  }
+  
+  .card-title {
+    @apply text-smart-green text-xl font-semibold mb-1 transition-colors duration-200;
+  }
+  
+  .card-subtitle {
+    @apply text-gray-600 text-sm transition-colors duration-200;
   }
 }
