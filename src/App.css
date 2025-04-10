@@ -6,3 +6,15 @@
   padding: 0;
   text-align: left;
 }
+
+.olive-green {
+  color: #5D7D41;
+}
+
+.bg-olive-green {
+  background-color: #5D7D41;
+}
+
+.border-olive-green {
+  border-color: #5D7D41;
+}
