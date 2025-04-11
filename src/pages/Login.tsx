@@ -5,8 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { Eye, EyeOff, Mail } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const [firstName, setFirstName] = useState('');
@@ -120,7 +119,7 @@ const Login = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-olive-green hover:bg-olive-green/90 text-white font-semibold"
+            className="w-full bg-olive-green text-white hover:bg-green-700 font-semibold"
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Login"}
@@ -159,3 +158,4 @@ const Login = () => {
 };
 
 export default Login;
+
