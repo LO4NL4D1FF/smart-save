@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
@@ -53,8 +52,8 @@ const Login = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-20 h-20 rounded-full border-2 border-smart-black flex items-center justify-center">
-              <span className="text-olive-green text-4xl font-bold">$</span>
+            <div className="w-20 h-20 rounded-full border-2 border-[#6E59A5] flex items-center justify-center">
+              <span className="text-[#9b87f5] text-4xl font-bold">$</span>
             </div>
           </div>
         </div>
@@ -119,7 +118,7 @@ const Login = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-olive-green text-white hover:bg-green-700 font-semibold"
+            className="w-full bg-[#9b87f5] text-white hover:bg-[#7E69AB] font-semibold"
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Login"}
@@ -158,4 +157,3 @@ const Login = () => {
 };
 
 export default Login;
-
