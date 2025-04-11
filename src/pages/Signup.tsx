@@ -80,8 +80,8 @@ const Signup = () => {
         
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-20 h-20 rounded-full border-2 border-smart-black flex items-center justify-center">
-              <span className="text-olive-green text-4xl font-bold">$</span>
+            <div className="w-20 h-20 rounded-full border-2 border-[#5D7D41] flex items-center justify-center">
+              <span className="text-[#5D7D41] text-4xl font-bold">$</span>
             </div>
           </div>
         </div>
@@ -89,11 +89,11 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex justify-center mb-4">
             <div className="relative">
-              <Avatar className="w-24 h-24 cursor-pointer border-2 border-olive-green">
+              <Avatar className="w-24 h-24 cursor-pointer border-2 border-[#5D7D41]">
                 {avatar ? (
                   <AvatarImage src={avatar} alt="User avatar" />
                 ) : (
-                  <AvatarFallback className="bg-gray-200 text-olive-green">
+                  <AvatarFallback className="bg-gray-200 text-[#5D7D41]">
                     <Upload size={32} />
                   </AvatarFallback>
                 )}
@@ -107,7 +107,7 @@ const Signup = () => {
               />
               <label
                 htmlFor="avatar"
-                className="absolute bottom-0 right-0 bg-olive-green rounded-full p-1 text-white cursor-pointer"
+                className="absolute bottom-0 right-0 bg-[#5D7D41] rounded-full p-1 text-white cursor-pointer"
               >
                 <Upload size={16} />
               </label>
@@ -124,7 +124,7 @@ const Signup = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="John"
-              className="border-olive-green"
+              className="border-[#5D7D41]"
             />
           </div>
           
@@ -138,7 +138,7 @@ const Signup = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Doe"
-              className="border-olive-green"
+              className="border-[#5D7D41]"
             />
           </div>
           
@@ -152,7 +152,7 @@ const Signup = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Link28"
-              className="border-olive-green"
+              className="border-[#5D7D41]"
             />
           </div>
           
@@ -167,7 +167,7 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="border-olive-green pr-10"
+                className="border-[#5D7D41] pr-10"
               />
               <button 
                 type="button"
@@ -190,7 +190,7 @@ const Signup = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="border-olive-green pr-10"
+                className="border-[#5D7D41] pr-10"
               />
               <button 
                 type="button"
@@ -204,7 +204,7 @@ const Signup = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-olive-green hover:bg-olive-green/90 text-white font-semibold"
+            className="w-full bg-[#5D7D41] hover:bg-[#4A6633] text-white font-semibold"
             disabled={isLoading}
           >
             {isLoading ? "Creating..." : "SIGN UP"}
@@ -232,7 +232,7 @@ const Signup = () => {
           
           <div className="mt-2 text-center">
             <span className="text-smart-black">Already have an account? </span>
-            <Link to="/login" className="text-olive-green hover:underline font-medium">
+            <Link to="/login" className="text-[#5D7D41] hover:underline font-medium">
               Log In
             </Link>
           </div>
