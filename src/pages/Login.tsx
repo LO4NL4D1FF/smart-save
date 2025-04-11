@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
@@ -52,8 +53,8 @@ const Login = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-20 h-20 rounded-full border-2 border-[#6E59A5] flex items-center justify-center">
-              <span className="text-[#9b87f5] text-4xl font-bold">$</span>
+            <div className="w-20 h-20 rounded-full border-2 border-[#5D7D41] flex items-center justify-center">
+              <span className="text-[#5D7D41] text-4xl font-bold">$</span>
             </div>
           </div>
         </div>
@@ -69,7 +70,7 @@ const Login = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="John"
-              className="border-olive-green"
+              className="border-[#5D7D41]"
             />
           </div>
           
@@ -83,7 +84,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Link28"
-              className="border-olive-green"
+              className="border-[#5D7D41]"
             />
           </div>
           
@@ -98,7 +99,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="border-olive-green pr-10"
+                className="border-[#5D7D41] pr-10"
               />
               <button 
                 type="button"
@@ -111,14 +112,14 @@ const Login = () => {
           </div>
           
           <div className="text-right">
-            <Link to="/forgot-password" className="text-xs text-blue-600 hover:underline">
+            <Link to="/forgot-password" className="text-xs text-[#5D7D41] hover:underline">
               Forget password?
             </Link>
           </div>
           
           <Button 
             type="submit" 
-            className="w-full bg-[#9b87f5] text-white hover:bg-[#7E69AB] font-semibold"
+            className="w-full bg-[#5D7D41] text-white hover:bg-[#4A6633] font-semibold"
             disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Login"}
@@ -147,7 +148,7 @@ const Login = () => {
         
         <div className="mt-6 text-center">
           <span className="text-smart-black">I don't have an account? </span>
-          <Link to="/signup" className="text-olive-green hover:underline font-medium">
+          <Link to="/signup" className="text-[#5D7D41] hover:underline font-medium">
             Create an account
           </Link>
         </div>
