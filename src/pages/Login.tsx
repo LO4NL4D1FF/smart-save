@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, DollarSign, Wallet, ChartBar } from 'lucide-react';
 
 const Login = () => {
   const [firstName, setFirstName] = useState('');
@@ -49,108 +49,145 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="flex justify-center mb-6">
-          <div className="relative">
-            <div className="w-20 h-20 rounded-full border-2 border-[#5D7D41] flex items-center justify-center">
-              <span className="text-[#5D7D41] text-4xl font-bold">$</span>
+    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-white to-gray-50">
+      {/* Financial illustration side */}
+      <div className="hidden md:flex md:w-1/2 bg-[#5D7D41]/10 p-12 items-center justify-center">
+        <div className="max-w-md text-center">
+          <div className="mb-6">
+            <div className="w-24 h-24 rounded-full bg-[#5D7D41]/20 flex items-center justify-center mx-auto mb-4">
+              <ChartBar className="h-12 w-12 text-[#5D7D41]" />
+            </div>
+            <h2 className="text-3xl font-bold text-[#5D7D41] mb-2">Welcome Back!</h2>
+            <p className="text-gray-600">Continue your journey to financial freedom with SmartSave.</p>
+          </div>
+          <div className="space-y-4 text-left">
+            <div className="flex items-center p-3 bg-white rounded-lg shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#5D7D41]/10 flex items-center justify-center mr-3">
+                <DollarSign className="h-5 w-5 text-[#5D7D41]" />
+              </div>
+              <div>
+                <h3 className="font-medium">Expense Analytics</h3>
+                <p className="text-sm text-gray-500">Get detailed insights on your spending</p>
+              </div>
+            </div>
+            <div className="flex items-center p-3 bg-white rounded-lg shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-[#5D7D41]/10 flex items-center justify-center mr-3">
+                <Wallet className="h-5 w-5 text-[#5D7D41]" />
+              </div>
+              <div>
+                <h3 className="font-medium">Investment Tracking</h3>
+                <p className="text-sm text-gray-500">Monitor your investment portfolio</p>
+              </div>
             </div>
           </div>
         </div>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="firstName" className="block text-smart-black font-medium">
-              First Name:
-            </label>
-            <Input
-              id="firstName"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="John"
-              className="border-[#5D7D41]"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label htmlFor="username" className="block text-smart-black font-medium">
-              Username:
-            </label>
-            <Input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Link28"
-              className="border-[#5D7D41]"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label htmlFor="password" className="block text-smart-black font-medium">
-              Password:
-            </label>
+      </div>
+      
+      {/* Login form */}
+      <div className="flex-1 flex items-center justify-center p-6">
+        <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+          <div className="flex justify-center mb-6">
             <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="border-[#5D7D41] pr-10"
-              />
-              <button 
-                type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2" 
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#5D7D41] to-[#8AAF5E] flex items-center justify-center">
+                <DollarSign className="h-8 w-8 text-white" />
+              </div>
             </div>
           </div>
           
-          <div className="text-right">
-            <Link to="/forgot-password" className="text-xs text-[#5D7D41] hover:underline">
-              Forget password?
-            </Link>
-          </div>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Sign in to your account</h2>
           
-          <Button 
-            type="submit" 
-            className="w-full bg-[#5D7D41] text-white hover:bg-[#4A6633] font-semibold"
-            disabled={isLoading}
-          >
-            {isLoading ? "Logging in..." : "Login"}
-          </Button>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="firstName" className="block text-gray-700 text-sm font-medium">
+                First Name
+              </label>
+              <Input
+                id="firstName"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="John"
+                className="border-gray-200 focus:border-[#5D7D41] focus:ring focus:ring-[#5D7D41]/20"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="username" className="block text-gray-700 text-sm font-medium">
+                Username
+              </label>
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="smartinvestor"
+                className="border-gray-200 focus:border-[#5D7D41] focus:ring focus:ring-[#5D7D41]/20"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <label htmlFor="password" className="block text-gray-700 text-sm font-medium">
+                  Password
+                </label>
+                <Link to="/forgot-password" className="text-xs text-[#5D7D41] hover:text-[#4A6633] font-medium hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="border-gray-200 focus:border-[#5D7D41] focus:ring focus:ring-[#5D7D41]/20 pr-10"
+                />
+                <button 
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600" 
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+            
+            <Button 
+              type="submit" 
+              className="w-full bg-gradient-to-r from-[#5D7D41] to-[#8AAF5E] hover:from-[#4A6633] hover:to-[#7A9F4E] text-white font-semibold py-2.5"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign In"}
+            </Button>
 
-          <div className="relative flex items-center py-2">
-            <div className="flex-grow border-t border-gray-300"></div>
-            <span className="flex-shrink mx-4 text-gray-400">or</span>
-            <div className="flex-grow border-t border-gray-300"></div>
-          </div>
-          
-          <Button 
-            type="button"
-            className="w-full border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 font-semibold flex items-center justify-center gap-2"
-            onClick={handleGoogleLogin}
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20">
-              <path d="M19.8 10.2a11.47 11.47 0 0 0-.17-2H10v3.8h5.5a4.77 4.77 0 0 1-2.04 3.1v2.58h3.3c1.93-1.77 3.04-4.4 3.04-7.48z" fill="#4285F4" />
-              <path d="M10 20c2.75 0 5.07-.91 6.76-2.45l-3.3-2.56a5.99 5.99 0 0 1-8.92-3.15H1.14v2.64A10 10 0 0 0 10 20z" fill="#34A853" />
-              <path d="M4.54 11.84a6.1 6.1 0 0 1 0-3.89V5.31H1.14a10.01 10.01 0 0 0 0 9.38l3.4-2.85z" fill="#FBBC05" />
-              <path d="M10 3.96c1.5 0 2.85.51 3.92 1.52l2.92-2.9A10 10 0 0 0 10 0a10 10 0 0 0-8.86 5.31l3.4 2.64A5.99 5.99 0 0 1 10 3.96z" fill="#EA4335" />
-            </svg>
-            Continue with Google
-          </Button>
-        </form>
-        
-        <div className="mt-6 text-center">
-          <span className="text-smart-black">I don't have an account? </span>
-          <Link to="/signup" className="text-[#5D7D41] hover:underline font-medium">
-            Create an account
-          </Link>
+            <div className="relative flex items-center py-2">
+              <div className="flex-grow border-t border-gray-200"></div>
+              <span className="flex-shrink mx-4 text-gray-400 text-sm">or continue with</span>
+              <div className="flex-grow border-t border-gray-200"></div>
+            </div>
+            
+            <Button 
+              type="button"
+              className="w-full border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 font-medium flex items-center justify-center gap-2 py-2.5"
+              onClick={handleGoogleLogin}
+            >
+              <svg width="18" height="18" viewBox="0 0 20 20">
+                <path d="M19.8 10.2a11.47 11.47 0 0 0-.17-2H10v3.8h5.5a4.77 4.77 0 0 1-2.04 3.1v2.58h3.3c1.93-1.77 3.04-4.4 3.04-7.48z" fill="#4285F4" />
+                <path d="M10 20c2.75 0 5.07-.91 6.76-2.45l-3.3-2.56a5.99 5.99 0 0 1-8.92-3.15H1.14v2.64A10 10 0 0 0 10 20z" fill="#34A853" />
+                <path d="M4.54 11.84a6.1 6.1 0 0 1 0-3.89V5.31H1.14a10.01 10.01 0 0 0 0 9.38l3.4-2.85z" fill="#FBBC05" />
+                <path d="M10 3.96c1.5 0 2.85.51 3.92 1.52l2.92-2.9A10 10 0 0 0 10 0a10 10 0 0 0-8.86 5.31l3.4 2.64A5.99 5.99 0 0 1 10 3.96z" fill="#EA4335" />
+              </svg>
+              Google
+            </Button>
+            
+            <div className="mt-6 text-center">
+              <span className="text-gray-600">Don't have an account? </span>
+              <Link to="/signup" className="text-[#5D7D41] hover:text-[#4A6633] font-medium">
+                Create an account
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
